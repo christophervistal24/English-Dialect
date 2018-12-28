@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".CategoryActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        >
+        <Button
+            android:id="@+id/btnEasy"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/cat_items_background"
+            android:textColor="#707070"
+            android:textSize="15sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/easy"/>
+
+        <Button
+            android:id="@+id/btnExtreme"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/cat_items_background"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="EXTREME"
+            android:textColor="#707070"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp"
+        >
+
+
+        <Button
+            android:id="@+id/btnModerate"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/cat_items_background"
+            android:textColor="#707070"
+            android:textSize="15sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/moderate"/>
+
+
+
+
+
+    </LinearLayout>
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:padding="20dp">
+       <Button
+           android:id="@+id/btnDifficult"
+           android:layout_width="150dp"
+           android:layout_height="150dp"
+           android:layout_alignParentBottom="true"
+           android:background="@drawable/cat_items_background"
+           android:fontFamily="@font/montserrat_bold"
+           android:text="@string/difficult"
+           android:textColor="#707070"
+           android:textSize="15sp" />
+
+       <Button
+           android:layout_width="150dp"
+           android:layout_height="150dp"
+           android:layout_alignParentEnd="true"
+           android:layout_alignParentBottom="true"
+           android:layout_marginBottom="17dp"
+           android:background="@drawable/cat_items_background"
+           android:fontFamily="@font/montserrat_bold"
+           android:text="SUPER"
+           android:textColor="#707070"
+           android:textSize="15sp" />
+
+   </RelativeLayout>
+</RelativeLayout>
