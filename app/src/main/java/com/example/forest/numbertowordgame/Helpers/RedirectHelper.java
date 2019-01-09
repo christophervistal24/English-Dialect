@@ -13,7 +13,8 @@ public class RedirectHelper {
     Intent intent;
     public RedirectHelper(Activity fromActivity, Class<?> toActivity)
     {
-        fromActivity.startActivity(new Intent(fromActivity, toActivity));
+        Intent intent = new Intent(fromActivity, toActivity);
+        fromActivity.startActivity(intent);
     }
 
 }

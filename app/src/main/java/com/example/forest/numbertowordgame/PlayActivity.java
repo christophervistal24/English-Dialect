@@ -8,6 +8,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.forest.numbertowordgame.Classes.NumberToWordConversion;
+import com.example.forest.numbertowordgame.DB.DB;
+import com.example.forest.numbertowordgame.Models.Points;
+import com.example.forest.numbertowordgame.Repositories.Points.PointsRepository;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -22,11 +30,15 @@ public class PlayActivity extends AppCompatActivity {
     @BindView(R.id.numberShadow) TextView generatedNumberShadow;
     @BindView(R.id.userAnswer) EditText userAnswer;
     @BindView(R.id.timer) TextView timer;
+    @BindView(R.id.correct) TextView correct;
+    @BindView(R.id.wrong) TextView wrong;
+
     private int min , max , randomNumber;
     private boolean isCounterRunning = false;
     private static int counter;
     CountDownTimer countDownTimer;
     private int questionResult;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +48,19 @@ public class PlayActivity extends AppCompatActivity {
         getIntentParameters();
         startTimer();
         generateQuestion();
+        initUserPoints();
+        addMobInit();
+    }
+
+    private void addMobInit() {
+        MobileAds.initialize(this, getString(R.string.google_ad_mod_id));
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-2034994780703506~2365933413/450");
+        mAdView = findViewById(R.id.adView);
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     //user want to answer new question
@@ -71,13 +96,24 @@ public class PlayActivity extends AppCompatActivity {
                                          .replaceAll("\\s|-","").toLowerCase();
         String correctAnswer = NumberToWordConversion.convert(randomNumber)
                                                     .replaceAll("\\s","").toLowerCase();
+        Points points = new Points();
         if (answerOfUser.equals(correctAnswer))
         {
-           Toast.makeText(PlayActivity.this, "Correct", Toast.LENGTH_SHORT).show();
+            points.setResult(1);
         } else {
-           Toast.makeText(PlayActivity.this, "Wrong", Toast.LENGTH_SHORT).show();
+            points.setResult(0);
         }
+        DB.getInstance(getApplicationContext()).pointsDao().insertResult(points);
+        initUserPoints();
     }
+
+    private void initUserPoints() {
+        int allCorrect = DB.getInstance(getApplicationContext()).pointsDao().getAllCorrect();
+        int allWrong = DB.getInstance(getApplicationContext()).pointsDao().getAllWrong();
+        correct.setText(this.getString(R.string.correct).concat(" " + String.valueOf(allCorrect)));
+        wrong.setText(this.getString(R.string.wrong).concat(" " + String.valueOf(allWrong)));
+    }
+
 
     private void generateQuestion()
     {

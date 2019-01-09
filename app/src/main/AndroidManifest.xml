@@ -18,7 +18,17 @@
         </activity>
         <activity android:name=".CategoryActivity" />
         <activity android:name=".PlayActivity" />
-        <activity android:name=".OptionsActivity"></activity>
+        <activity android:name=".OptionsActivity" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/google_ad_mod_id" />
+
+        <activity android:name="com.forest.numbertowordgame.RegisterActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".GrammarActivity" />
+        <activity android:name=".SpellingActivity" />
+        <activity android:name=".PronounceActivity"></activity>
     </application>
 
 </manifest>

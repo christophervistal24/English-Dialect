@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Number2Word</string>
+    <string name="app_name">ED Game</string>
     <string name="start_to_play">P L A Y</string>
     <string name="options">OPTIONS</string>
     <string name="easy">Easy</string>
@@ -7,4 +7,17 @@
     <string name="difficult">Difficult</string>
     <string name="your_answer_here">Your answer here</string>
     <string name="next">N e x t</string>
+    <string name="correct">Correct : </string>
+    <string name="wrong">Wrong : </string>
+    <string name="google_ad_mod_id">ca-app-pub-2034994780703506~2365933413</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="username">Your username here</string>
+    <string name="password">Your password here</string>
+    <string name="user_greet">Welcome back , </string>
+
+    <string-array name="levels">
+        <item>beginner</item>
+        <item>advance</item>
+        <item>expert</item>
+    </string-array>
 </resources>

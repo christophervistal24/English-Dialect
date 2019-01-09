@@ -1,56 +1,92 @@
 package com.example.forest.numbertowordgame;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.forest.numbertowordgame.Helpers.RedirectHelper;
+import com.example.forest.numbertowordgame.Helpers.SharedPref;
+import com.example.forest.numbertowordgame.Repositories.Users.UserRepository;
+import com.wooplr.spotlight.SpotlightConfig;
+import com.wooplr.spotlight.SpotlightView;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CategoryActivity extends AppCompatActivity {
+
+    @BindView(R.id.englishGrammar) Button englishGrammar;
+    @BindView(R.id.spelling) Button spelling;
+    @BindView(R.id.pronounce) Button pronounce;
+    @BindView(R.id.userGreet) TextView userGreet;
+
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         ButterKnife.bind(this);
+        greetUser();
+    }
+
+    private void greetUser() {
+        SharedPref.PREF_FILE = "user";
+        username =  SharedPref.getSharedPreferenceString(getApplicationContext(),"username",null);
+        userGreet.setText(getString(R.string.user_greet).concat(username));
     }
 
 
-    @OnClick({R.id.btnEasy,R.id.btnModerate,R.id.btnDifficult})
-    public void selectCategory(View v)
-    {
+    @OnClick({R.id.englishGrammar,R.id.spelling,R.id.pronounce})
+    public void selectCategory(View v) {
         Intent myIntent = null;
         switch (v.getId())
         {
-            case R.id.btnEasy :
-                    myIntent = new Intent(CategoryActivity.this, PlayActivity.class);
-                    myIntent.putExtra("min",1);
-                    myIntent.putExtra("max",100);
-                    myIntent.putExtra("counter",11000);
+            case R.id.englishGrammar :
+                myIntent = new Intent(CategoryActivity.this, GrammarActivity.class);
                 break;
 
-            case R.id.btnModerate :
-                    myIntent = new Intent(CategoryActivity.this, PlayActivity.class);
-                    myIntent.putExtra("min",100);
-                    myIntent.putExtra("max",10000);
-                    myIntent.putExtra("counter",21000);
+            case R.id.spelling :
+                myIntent = new Intent(CategoryActivity.this, SpellingActivity.class);
                 break;
 
-            case R.id.btnDifficult :
-                    myIntent = new Intent(CategoryActivity.this, PlayActivity.class);
-                    myIntent.putExtra("min",10000);
-                    myIntent.putExtra("max",1000000);
-                    myIntent.putExtra("counter",31000);
+            case R.id.pronounce :
+                myIntent = new Intent(CategoryActivity.this, PronounceActivity.class);
                 break;
         }
-        CategoryActivity.this.startActivity(myIntent);
+        startActivity(myIntent);
+
+
     }
+
+    @OnClick(R.id.logout)
+    public void logout()
+    {
+        SharedPref.PREF_FILE = "user";
+        SharedPref.setSharedPreferenceString(getApplicationContext(),"username",null);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!username.isEmpty()) {
+            new RedirectHelper(this,CategoryActivity.class);
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+    }
+
 
 }

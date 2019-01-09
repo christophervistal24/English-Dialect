@@ -3,27 +3,27 @@ package com.example.forest.numbertowordgame.Models;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(tableName = "users")
-public class User {
+@Entity(tableName = "points")
+public class Points {
     @PrimaryKey(autoGenerate = true)
     public int id;
-    public String username;
+    public int result;
 
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
 
     public int getId() {
         return id;
     }
 
+
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
 }
